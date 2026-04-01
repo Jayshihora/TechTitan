@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Fraud Shield</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>UPI Fraud Shield</h1>
+  <p class="subtitle">Real-time behavioral fraud detection for UPI payments</p>
+
+  <div class="screen">
+
+    <!-- Top Header -->
+    <div class="topbar">
+      <p>Demo — Behavioral Risk Engine</p>
+      <h2>Simulate a Payment</h2>
+    </div>
+
+    <!-- Scenario Selection -->
+    <div class="section">
+      <div class="label">Choose a demo scenario</div>
+
+      <div class="scenario-btns">
+        <button class="scenario-btn active" onclick="loadScenario(0)">
+          Scenario 1 — Normal payment
+        </button>
+
+        <button class="scenario-btn" onclick="loadScenario(1)">
+          Scenario 2 — Suspicious
+        </button>
+
+        <button class="scenario-btn" onclick="loadScenario(2)">
+          Scenario 3 — Scam detected
+        </button>
+      </div>
+    </div>
+
+    <!-- Payment Card -->
+    <div class="pay-card">
+
+      <div class="payee-row">
+        <div class="avatar" id="avatar">AJ</div>
+
+        <div>
+          <div class="payee-name" id="payee-name">Zomato</div>
+          <div class="payee-upi" id="payee-upi">zomato@upi</div>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div class="amount-row">
+        <div class="amount-label">Amount</div>
+        <div class="amount-value" id="amount">₹150</div>
+      </div>
+
+      <!-- Meta -->
+      <div class="meta-row">
+        <span id="user-label"></span>
+        <span id="time-label"></span>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert-box" id="alert-box">
+        <div class="alert-title" id="alert-title"></div>
+
+        <div class="score-bar-wrap">
+          <div class="score-bar" id="score-bar"></div>
+        </div>
+
+        <div class="score-text" id="score-text"></div>
+        <ul class="alert-reasons" id="alert-reasons"></ul>
+
+        <div class="hindi-msg" id="hindi-msg">
+          रुकिए! यह लेनदेन खतरनाक लग रहा है।
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-row">
+        <button class="btn-cancel" onclick="cancel()">Cancel</button>
+        <button class="btn-pay" id="pay-btn" onclick="pay()">Analyse & Pay</button>
+      </div>
+
+      <div class="result-msg" id="result-msg"></div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
