@@ -1,92 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UPI Fraud Shield</title>
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <h1>UPI Fraud Shield</h1>
-  <p class="subtitle">Real-time behavioral fraud detection for UPI payments</p>
+  <div class="page">
 
-  <div class="screen">
-
-    <!-- Top Header -->
-    <div class="topbar">
-      <p>Demo — Behavioral Risk Engine</p>
-      <h2>Simulate a Payment</h2>
+    <div class="header">
+      <div class="logo">🛡️</div>
+      <h1>UPI Fraud Shield</h1>
+      <p>Detects scams before your money moves</p>
     </div>
 
-    <!-- Scenario Selection -->
-    <div class="section">
-      <div class="label">Choose a demo scenario</div>
+    <div class="container">
 
-      <div class="scenario-btns">
-        <button class="scenario-btn active" onclick="loadScenario(0)">
-          Scenario 1 — Normal payment
-        </button>
-
-        <button class="scenario-btn" onclick="loadScenario(1)">
-          Scenario 2 — Suspicious
-        </button>
-
-        <button class="scenario-btn" onclick="loadScenario(2)">
-          Scenario 3 — Scam detected
-        </button>
+      <div class="card">
+        <p class="card-label">Select User</p>
+        <select id="user-select" onchange="onUserChange()">
+          <option value="arjun">Arjun — Student, 21</option>
+          <option value="jay">Jay — Student, 22</option>
+          <option value="pooja">Pooja — Student, 25</option>
+          <option value="kirtan">Kirtan — Student, 25</option>
+          <option value="priya">Priya — Merchant, 32</option>
+          <option value="ramesh">Ramesh — Retired, 65</option>
+        </select>
       </div>
-    </div>
 
-    <!-- Payment Card -->
-    <div class="pay-card">
-
-      <div class="payee-row">
-        <div class="avatar" id="avatar">AJ</div>
-
-        <div>
-          <div class="payee-name" id="payee-name">Zomato</div>
-          <div class="payee-upi" id="payee-upi">zomato@upi</div>
+      <div class="card">
+        <p class="card-label">Transaction Details</p>
+        <div class="field-row">
+          <label>Paying To</label>
+          <input type="text" id="payee" placeholder="e.g. Zomato" />
+        </div>
+        <div class="field-row">
+          <label>Amount (₹)</label>
+          <input type="number" id="amount" placeholder="e.g. 500" />
+        </div>
+        <div class="field-row">
+          <label>Hour (0–23)</label>
+          <input type="number" id="hour" min="0" max="23" placeholder="e.g. 14" />
+        </div>
+        <div class="field-row">
+          <label>Location</label>
+          <input type="text" id="location" placeholder="e.g. Pune" />
         </div>
       </div>
 
-      <!-- Amount -->
-      <div class="amount-row">
-        <div class="amount-label">Amount</div>
-        <div class="amount-value" id="amount">₹150</div>
-      </div>
-
-      <!-- Meta -->
-      <div class="meta-row">
-        <span id="user-label"></span>
-        <span id="time-label"></span>
-      </div>
-
-      <!-- Alert -->
-      <div class="alert-box" id="alert-box">
-        <div class="alert-title" id="alert-title"></div>
-
-        <div class="score-bar-wrap">
-          <div class="score-bar" id="score-bar"></div>
-        </div>
-
-        <div class="score-text" id="score-text"></div>
-        <ul class="alert-reasons" id="alert-reasons"></ul>
-
-        <div class="hindi-msg" id="hindi-msg">
-          रुकिए! यह लेनदेन खतरनाक लग रहा है।
+      <div class="card scenario-card">
+        <p class="card-label">Quick Demo Scenarios</p>
+        <div class="scenario-list">
+          <button class="scene-btn" onclick="loadScene(0)">
+            Arjun → Zomato <span class="tag green">Safe</span>
+          </button>
+          <button class="scene-btn" onclick="loadScene(1)">
+            Jay → Unknown Trader <span class="tag yellow">Suspicious</span>
+          </button>
+          <button class="scene-btn" onclick="loadScene(2)">
+            Pooja → Midnight transfer <span class="tag orange">Risky</span>
+          </button>
+          <button class="scene-btn" onclick="loadScene(3)">
+            Kirtan → Bulk transfer <span class="tag orange">Risky</span>
+          </button>
+          <button class="scene-btn" onclick="loadScene(4)">
+            Priya → Unknown Trader <span class="tag orange">Risky</span>
+          </button>
+          <button class="scene-btn" onclick="loadScene(5)">
+            Ramesh → Bank scammer <span class="tag red">Scam</span>
+          </button>
         </div>
       </div>
 
-      <!-- Buttons -->
-      <div class="btn-row">
-        <button class="btn-cancel" onclick="cancel()">Cancel</button>
-        <button class="btn-pay" id="pay-btn" onclick="pay()">Analyse & Pay</button>
-      </div>
+      <button class="analyse-btn" onclick="analyse()">Analyse Transaction</button>
 
-      <div class="result-msg" id="result-msg"></div>
+      <div class="result-card" id="result-card">
+        <div class="result-top">
+          <span class="result-icon" id="result-icon">✅</span>
+          <div>
+            <div class="result-title" id="result-title">Safe</div>
+            <div class="result-sub" id="result-sub">No issues found</div>
+          </div>
+        </div>
+        <div class="score-row">
+          <span class="score-label">Risk Score</span>
+          <span class="score-value" id="score-value">0 / 100</span>
+        </div>
+        <div class="score-track">
+          <div class="score-fill" id="score-fill"></div>
+        </div>
+        <ul class="reason-list" id="reason-list"></ul>
+        <div class="hindi-box" id="hindi-box">
+          ⚠️ रुकिए! यह लेनदेन खतरनाक लग रहा है। कृपया अपने परिवार से पूछें।
+        </div>
+        <div class="action-row">
+          <button class="btn-cancel" onclick="reset()">Cancel</button>
+          <button class="btn-confirm" id="confirm-btn">Confirm</button>
+        </div>
+      </div>
 
     </div>
   </div>

@@ -1,114 +1,308 @@
-/* Reset */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
 }
 
-/* Body */
 body {
-  background: #f4f4f8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: #eef0f7;
+  min-height: 100vh;
   padding: 2rem 1rem;
 }
 
-/* Headings */
-h1 {
+.page {
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+/* header */
+.header {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+.logo {
+  font-size: 2.4rem;
+  margin-bottom: 6px;
+}
+
+.header h1 {
   font-size: 22px;
-  color: #1a1a2e;
+  font-weight: 700;
+  color: #1a1033;
 }
 
-.subtitle {
+.header p {
   font-size: 13px;
-  color: #666;
-  margin-bottom: 1.5rem;
+  color: #999;
+  margin-top: 4px;
 }
 
-/* Card */
-.screen {
-  width: 100%;
-  max-width: 420px;
+/* container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* card */
+.card {
   background: white;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #e2e2ee;
 }
 
-/* Topbar */
-.topbar {
-  background: #5C3EBC;
-  color: white;
-  padding: 1rem;
+.card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #bbb;
+  margin-bottom: 10px;
 }
 
-/* Section */
-.section {
-  padding: 1rem;
-}
-
-/* Buttons */
-.scenario-btn {
-  padding: 10px;
-  border-radius: 8px;
+/* select */
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
   border: 1px solid #ddd;
+  font-size: 14px;
+  color: #333;
+  background: #fafafa;
   cursor: pointer;
 }
 
-.scenario-btn.active {
-  background: #EEEDFE;
-  border-color: #5C3EBC;
+select:focus {
+  outline: none;
+  border-color: #7c5cbf;
 }
 
-/* Payment */
-.pay-card {
-  padding: 1rem;
-}
-
-.avatar {
-  width: 45px;
-  height: 45px;
-  background: #EEEDFE;
+/* fields */
+.field-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f4f4f4;
 }
 
-.amount-value {
-  font-size: 28px;
-  font-weight: bold;
+.field-row:last-child {
+  border-bottom: none;
 }
 
-/* Alert */
-.alert-box {
+.field-row label {
+  font-size: 13px;
+  color: #888;
+  min-width: 90px;
+}
+
+.field-row input {
+  flex: 1;
+  border: none;
+  font-size: 14px;
+  color: #222;
+  background: transparent;
+  padding: 2px 0;
+}
+
+.field-row input:focus {
+  outline: none;
+}
+
+.field-row input::placeholder {
+  color: #ccc;
+}
+
+/* scenarios */
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.scene-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 9px;
+  border: 1px solid #eee;
+  background: #fafafa;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.scene-btn:hover {
+  background: #f0ecff;
+  border-color: #c4b5f4;
+}
+
+/* tags */
+.tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 99px;
+}
+
+.tag.green  { background: #e5f5d0; color: #3a6e10; }
+.tag.yellow { background: #fff0d0; color: #996010; }
+.tag.orange { background: #ffeadb; color: #a04010; }
+.tag.red    { background: #fde6e6; color: #992020; }
+
+/* analyse button */
+.analyse-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 13px;
+  border: none;
+  background: #5c3ebc;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.analyse-btn:hover { background: #4a2fa0; }
+
+/* result card */
+.result-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.2rem;
+  border: 1px solid #e2e2ee;
   display: none;
-  padding: 10px;
-  border-radius: 8px;
 }
 
-.alert-box.show {
-  display: block;
+.result-card.show { display: block; }
+.result-card.green  { border-color: #7bc43a; background: #f4fce8; }
+.result-card.yellow { border-color: #d4a020; background: #fffbee; }
+.result-card.orange { border-color: #d06020; background: #fff4ec; }
+.result-card.red    { border-color: #cc3333; background: #fff0f0; }
+
+.result-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
-.alert-box.red {
-  background: #FCEBEB;
-  border: 1px solid red;
+.result-icon { font-size: 22px; }
+
+.result-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1033;
 }
 
-/* Buttons */
-.btn-row {
+.result-sub {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+/* score */
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.score-value {
+  font-weight: 600;
+  color: #555;
+}
+
+.score-track {
+  background: #eee;
+  border-radius: 99px;
+  height: 7px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.score-fill {
+  height: 7px;
+  border-radius: 99px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+/* reasons */
+.reason-list {
+  list-style: none;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reason-list li {
+  font-size: 13px;
+  color: #444;
+  padding-left: 16px;
+  position: relative;
+}
+
+.reason-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #bbb;
+}
+
+/* hindi box */
+.hindi-box {
+  display: none;
+  background: #fff0f0;
+  border-left: 3px solid #cc3333;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #8b0000;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+/* action row */
+.action-row {
   display: flex;
   gap: 10px;
-}
-
-.btn-pay {
-  flex: 2;
-  background: #5C3EBC;
-  color: white;
+  margin-top: 4px;
 }
 
 .btn-cancel {
   flex: 1;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
 }
+
+.btn-cancel:hover { background: #f5f5f5; }
+
+.btn-confirm {
+  flex: 2;
+  padding: 11px;
+  border-radius: 10px;
+  border: none;
+  background: #5c3ebc;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-confirm:hover { background: #4a2fa0; }
+.btn-confirm:disabled { background: #c0b0e8; cursor: not-allowed; }
